@@ -1,0 +1,49 @@
+﻿@page "/Books/getall"
+@model BooksDBApp.Pages.Books.IndexModel
+@{
+}
+
+<h1 class="text-center mb-4">Books</h1>
+<hr />
+<a class="btn btn-success btn-lg mb-4" href="/Books/Insert">New Book</a>
+
+<table class="mx-auto table table-light text-center border border-2">
+    <thead>
+        <tr><th colspan="5" class="fs-5 bg-body text-light">My Favorite Books</th></tr>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>Edit/Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Books is not null)
+        {
+            @foreach (var book in Model.Books)
+            {
+                <tr>
+                    <td>@book.Id</td>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.Publisher</td>
+                    <td>
+                        <a class="btn btn-warning" href="/Books/@book.Id/Update">Edit</a>
+                        <a class="btn btn-danger" href="javascript:void(0)" onclick="confirmDelete(@book.Id)">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div class="text-center">
+    @if (Model.ErrorObj is not null)
+    {
+        <p class="text-center text-danger">@Model.ErrorObj.Message</p>
+    }
+</div>
+
+<script src="~/js/books.js"></script>
+
